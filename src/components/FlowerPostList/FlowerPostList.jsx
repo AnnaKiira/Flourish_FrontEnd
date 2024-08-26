@@ -10,7 +10,7 @@ const FlowerPostList = ({ flowerposts }) => {
               <h2>{flowerpost.title}</h2>
               <p>
                 {flowerpost.owner.username} posted on 
-                {new Date(flowerpost.createdAt).toLocaleDateString()}
+                {new Date(flowerpost.created_at).toLocaleDateString()}
               </p>
             </header>
             <p>{flowerpost.text}</p>

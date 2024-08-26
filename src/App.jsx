@@ -7,7 +7,7 @@ import SignupForm from './components/SignupForm/SignupForm.jsx'
 import SigninForm from './components/SigninForm/SigninForm.jsx'
 import ProfilePage from './components/ProfilePage/ProfilePage.jsx'
 import FlowerPostList from './components/FlowerPostList/FlowerPostList.jsx'
-//import FlowerPostDetails from './components/FlowerPostDetails/FlowerPostDetails.jsx'
+import FlowerPostDetails from './components/FlowerPostDetails/FlowerPostDetails.jsx'
 //import FlowerPostForm from './components/FlowerPostForm/FlowerPostForm.jsx'
 
 import * as authService from '../src/services/authService.js'
@@ -44,6 +44,7 @@ const App = () => {
             <>
             <Route path="/" element={<ProfilePage user={user} />} />
             <Route path="/flowerposts" element={<FlowerPostList flowerposts={flowerposts} />} />
+            <Route path="/flowerposts/:flowerpostId" element={<FlowerPostDetails />} />
             </>
           ) : (
             <Route path="/" element={<LandingPage />} />
