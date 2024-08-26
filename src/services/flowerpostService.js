@@ -22,4 +22,21 @@ const show = async (flowerpostId) => {
     }
 }
 
-export {index, show}
+const create = async (flowerpostFormData) => {
+    try {
+        const res = await fetch(`${BASE_URL}/`, {
+            method: 'POST',
+            headers: { 
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(flowerpostFormData),
+        })
+        return res.json()
+    } catch (error) {
+        console.log('Error creating flowerpost:', error)
+    }
+}
+
+
+export { index, show, create }
