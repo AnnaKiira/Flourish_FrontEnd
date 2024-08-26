@@ -1,4 +1,5 @@
 const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/flowerposts`
+const COMMENT_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/comments`
 
 const index = async () => {
     try {
@@ -26,7 +27,7 @@ const create = async (flowerpostFormData) => {
     try {
         const res = await fetch(`${BASE_URL}/`, {
             method: 'POST',
-            headers: { 
+            headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json',
             },
@@ -38,5 +39,25 @@ const create = async (flowerpostFormData) => {
     }
 }
 
+const createComment = async (flowerpostId, formData) => {
+    try {
+        const res = await fetch(`${COMMENT_URL}/`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                text: formData.text,
+                flowerpost: flowerpostId
+            }),
+        })
+        return res.json()
+    } catch (error) {
+        console.error('Error creating comment:', error)
+    }
+}
 
-export { index, show, create }
+
+
+export { index, show, create, createComment }

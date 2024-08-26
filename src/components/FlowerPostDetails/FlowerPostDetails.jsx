@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import CommentForm from '../CommentForm/CommentForm'
 import * as flowerpostService from '../../services/flowerpostService'
 
 const FlowerpostDetails = (props) => {
@@ -17,6 +18,11 @@ const FlowerpostDetails = (props) => {
     }, [flowerpostId])
     console.log('flowerpost state:', flowerpost)
 
+    const handleAddComment = async (formData) => {
+        const newComment = await flowerpostService.createComment(flowerpostId, formData)
+        setFlowerpost({ ...flowerpost, comments: [...flowerpost.comments, newComment] })
+    }
+
     if (!flowerpost) return <main>Loading...</main>
     return (
         <main>
@@ -31,6 +37,7 @@ const FlowerpostDetails = (props) => {
             <p>{flowerpost.text}</p>
             <section>
                 <h2>Comments</h2>
+                <CommentForm handleAddComment={handleAddComment}/>
                 {!flowerpost.comments.length && <p>There are no comments</p>}
                 {flowerpost.comments.map((comment) => (
                     <article key={comment.id}>
