@@ -22,26 +22,33 @@ const index = async () => {
 
 const show = async (flowerpostId) => {
     try {
-        const token = localStorage.getItem('token');
-        if (!token) throw new Error('No token found');
-        const res = await fetch(`${BASE_URL}${flowerpostId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (!res.ok) {
-          const errorData = await res.json();
-          throw new Error(errorData.detail || `HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-      } catch (error) {
-        console.error('Error fetching flowerpost:', error);
-        throw error;
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('No token found');
+  
+      const res = await fetch(`${BASE_URL}${flowerpostId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+  
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error('Error response:', errorData);
+        throw new Error(errorData.detail || `HTTP error! status: ${res.status}`);
       }
+  
+      const data = await res.json();
+      console.log('Flowerpost data from API:', data)
+      return data;
+  
+    } catch (error) {
+      console.error('Error fetching flowerpost:', error);
+      throw error
     }
+}
 
 const create = async (flowerpostFormData) => {
     try {
-        const token = localStorage.getItem('token');
-        if (!token) throw new Error('No token found');
+        const token = localStorage.getItem('token')
+        if (!token) throw new Error('No token found')
         
         const res = await fetch(BASE_URL, {
             method: 'POST',
@@ -50,17 +57,17 @@ const create = async (flowerpostFormData) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(flowerpostFormData),
-        });
+        })
         
         if (!res.ok) {
             const errorData = await res.json();
-            throw new Error(errorData.detail || `HTTP error! status: ${res.status}`);
+            throw new Error(errorData.detail || `HTTP error! status: ${res.status}`)
         }
         
-        return res.json();
+        return res.json()
     } catch (error) {
-        console.error('Error creating flowerpost:', error);
-        throw error;
+        console.error('Error creating flowerpost:', error)
+        throw error
     }
 }
 
@@ -85,17 +92,26 @@ const createComment = async (flowerpostId, formData) => {
 
 const deleteFlowerpost = async (flowerpostId) => {
     try {
-      const res = await fetch(`${BASE_URL}${flowerpostId}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      })
-      return res.json()
-    } catch (error) {
-      console.log(error)
-    }
-  }
+        const token = localStorage.getItem('token')
+        if (!token) throw new Error('No token found')
+    
+        const res = await fetch(`${BASE_URL}${flowerpostId}`, {
+          method: 'DELETE',
+          headers: { 
+            Authorization: `Bearer ${token}`,
+          },
+        })
+    
+        if (!res.ok) {
+          throw new Error(`Failed to delete flowerpost. Status: ${res.status}`)
+        }
+    
+        return { message: 'Flowerpost deleted successfully' }
+      } catch (error) {
+        console.error('Error deleting flowerpost:', error)
+        throw error
+      }
+}
 
 
 export { index, show, create, createComment, deleteFlowerpost }

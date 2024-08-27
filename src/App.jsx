@@ -59,7 +59,7 @@ const App = () => {
 
   const handleDeleteFlowerpost = async (flowerpostId) => { 
       try {
-        await flowerpostService.deleteHoot(flowerpostId)
+        await flowerpostService.deleteFlowerpost(flowerpostId)
         await fetchAllFlowerposts()
         navigate('/flowerposts')
       } catch (error) {

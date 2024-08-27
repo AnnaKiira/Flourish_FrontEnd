@@ -18,13 +18,16 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
                 const flowerpostData = await flowerpostService.show(flowerpostId)
                 console.log('flowerpostData', flowerpostData)
                 setFlowerpost(flowerpostData)
+                console.log('Current user:', user) //ADDED
+                console.log('Flowerpost owner:', flowerpostData.owner) //ADDED
+                console.log('Is owner:', flowerpostData.owner.id === user.user_id) //ADDED
             } catch (error) {
                 console.error('Error fetching flowerpost:', error)
                 setError(error.message)
             }
         }
         fetchFlowerpost()
-    }, [flowerpostId])
+    }, [flowerpostId, user])
     
     console.log('flowerpost state:', flowerpost)
 
@@ -37,6 +40,8 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
             console.error('Error adding comment:', error)
         }
     }
+
+    const isOwner = flowerpost && user && flowerpost.owner.id === user.user_id
 
     if (!flowerpost) return <main>Loading...</main>
 
@@ -54,11 +59,11 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
 
             <p>{flowerpost.text}</p>
 
-            { flowerpost.owner?.id === user?.id &&
+            { isOwner && (
                 <section>
                     <button onClick={() => handleDeleteFlowerpost(flowerpostId)}>Delete Post</button>
                 </section>
-            }
+            )}
 
             <section>
                 <h2>Comments</h2>
