@@ -16,11 +16,7 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
             // added try-catch for error handling
             try {
                 const flowerpostData = await flowerpostService.show(flowerpostId)
-                console.log('flowerpostData', flowerpostData)
                 setFlowerpost(flowerpostData)
-                console.log('Current user:', user) //ADDED
-                console.log('Flowerpost owner:', flowerpostData.owner) //ADDED
-                console.log('Is owner:', flowerpostData.owner.id === user.user_id) //ADDED
             } catch (error) {
                 console.error('Error fetching flowerpost:', error)
                 setError(error.message)
@@ -28,8 +24,6 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
         }
         fetchFlowerpost()
     }, [flowerpostId, user])
-    
-    console.log('flowerpost state:', flowerpost)
 
     const handleAddComment = async (formData) => {
         // added try-catch for error handling
@@ -49,11 +43,10 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
         <main>
 
             <header>
-                <p>{flowerpost.category?.name?.toUpperCase() || 'No Category'}</p>
                 <h1>{flowerpost.title}</h1>
+                <p>Category: {flowerpost.category?.name || 'Uncategorized'}</p>
                 <p>
-                    {flowerpost.owner?.username} posted on
-                    {new Date(flowerpost.created_at).toLocaleDateString()}
+                    Posted by: {flowerpost.owner?.username || 'Unknown User'}
                 </p>
             </header>
 
@@ -74,7 +67,7 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
                     <article key={comment.id}>
                         <header>
                             <p>
-                                {comment.owner?.username} posted on
+                                {comment.owner?.username} posted on <br></br>
                                 {new Date(comment.created_at).toLocaleDateString()}
                             </p>
                         </header>

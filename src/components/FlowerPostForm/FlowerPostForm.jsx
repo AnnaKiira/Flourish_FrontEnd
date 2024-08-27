@@ -12,8 +12,8 @@ const FlowerpostForm = ({handleAddFlowerpost, handleUpdateFlowerpost}) => {
 
   const categoryOptions = [ //the categories are IDs on the backend side
     { id: '1', name: 'Question' }, //and I was originally setting this file up receiving categories as a string, which caused errors when creating a post
-    { id: '2', name: 'Status' }, //hardcoded the category IDs instead of names, resolved the error
-    { id: '3', name: 'Guide' },
+    { id: '2', name: 'Guide' }, //hardcoded the category IDs instead of names, resolved the error
+    { id: '3', name: 'Status' },
   ]
 
   const { flowerpostId } = useParams()
