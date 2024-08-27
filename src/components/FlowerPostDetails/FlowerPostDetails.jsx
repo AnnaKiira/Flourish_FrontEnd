@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect, useContext } from 'react'
 import { AuthedUserContext } from '../../App'
 import CommentForm from '../CommentForm/CommentForm'
@@ -61,6 +61,7 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
 
             { isOwner && (
                 <section>
+                    <Link to={`/flowerposts/${flowerpostId}/edit`}>Edit</Link>
                     <button onClick={() => handleDeleteFlowerpost(flowerpostId)}>Delete Post</button>
                 </section>
             )}

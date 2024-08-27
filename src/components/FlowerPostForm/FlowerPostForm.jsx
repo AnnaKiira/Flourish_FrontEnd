@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import * as flowerpostService from '../../services/flowerpostService'
 
-const FlowerpostForm = ({handleAddFlowerpost}) => {
+const FlowerpostForm = ({handleAddFlowerpost, handleUpdateFlowerpost}) => {
   const [formData, setFormData] = useState({
     title: '',
     category: '1',
@@ -14,18 +16,41 @@ const FlowerpostForm = ({handleAddFlowerpost}) => {
     { id: '3', name: 'Guide' },
   ]
 
+  const { flowerpostId } = useParams()
+
+  useEffect(() => {
+    const fetchFlowerpost = async () => {
+        if (flowerpostId) {
+          const flowerpostData = await flowerpostService.show(flowerpostId)
+          setFormData({
+            ...flowerpostData,
+            category: flowerpostData.category.id //ensuring the category is sent just as in id and not as an object (what backend expect)
+          })
+        }
+      }
+      fetchFlowerpost();
+    }, [flowerpostId])
+
   const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value })
+    const { name, value } = event.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === 'category' ? parseInt(value, 10) : value //converting the value to an integer since the backend expects an id not a string
+    }))
   }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    //console.log('formData', formData);
-    handleAddFlowerpost(formData)
+    event.preventDefault()
+    if (flowerpostId) {
+        handleUpdateFlowerpost(flowerpostId, formData)
+    } else {
+        handleAddFlowerpost(formData)
+    }
   }
 
   return (
     <main>
+        <h1>{ flowerpostId ? 'Update Post' : 'Create Post'}</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title-input">Title</label>
         <input

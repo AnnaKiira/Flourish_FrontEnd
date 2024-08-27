@@ -113,5 +113,30 @@ const deleteFlowerpost = async (flowerpostId) => {
       }
 }
 
+const updateFlowerpost = async (flowerpostId, flowerpostFormData) => {
+    const token = localStorage.getItem('token')
+    if (!token) throw new Error('No token found')
 
-export { index, show, create, createComment, deleteFlowerpost }
+    const { owner, ...dataToSend } = flowerpostFormData //removing owner from data to prevent unnecessary owner data mybackend doesn't expect
+    try {
+      const res = await fetch(`${BASE_URL}${flowerpostId}/`, {
+        method: 'PUT',
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      })
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.detail || `Failed to update flowerpost. Status: ${res.status}`)
+      }
+      return res.json()
+    } catch (error) {
+      console.error('Error updating flowerpost:', error)
+      throw error
+    }
+}
+
+
+export { index, show, create, createComment, deleteFlowerpost, updateFlowerpost }

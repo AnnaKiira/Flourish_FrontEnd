@@ -66,7 +66,20 @@ const App = () => {
         console.error('Error deleting flowerpost:', error)
         setError('Failed to delete flower post. Please try again.')
       }
+  }
+
+  const handleUpdateFlowerpost = async (flowerpostId, flowerpostFormData) => {
+    try {
+      const updatedFlowerpost = await flowerpostService.updateFlowerpost(flowerpostId, flowerpostFormData)
+      setFlowerposts(flowerposts.map((flowerpost) => 
+        flowerpost.id === flowerpostId ? updatedFlowerpost : flowerpost
+      ))
+      navigate(`/flowerposts/${flowerpostId}`)
+    } catch (error) {
+      console.error('Error updating flowerpost:', error)
+      setError('Failed to update flower post. Please try again.')
     }
+  }
 
   const handleSignout = () => {
     authService.signout()
@@ -85,6 +98,7 @@ const App = () => {
             <Route path="/flowerposts" element={<FlowerPostList flowerposts={flowerposts} />} />
             <Route path="/flowerposts/:flowerpostId" element={<FlowerPostDetails handleDeleteFlowerpost={handleDeleteFlowerpost}/>} />
             <Route path="/flowerposts/new" element={<FlowerPostForm handleAddFlowerpost={handleAddFlowerpost} />} />
+            <Route path="/flowerposts/:flowerpostId/edit" element={<FlowerPostForm handleUpdateFlowerpost={handleUpdateFlowerpost} />} />
             </>
           ) : (
             <Route path="/" element={<LandingPage />} />
