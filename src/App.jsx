@@ -14,21 +14,40 @@ import * as authService from '../src/services/authService.js'
 import * as flowerpostService from './services/flowerpostService.js'
 
 
-export const AuthedUser = createContext(null)
+export const AuthedUserContext = createContext(null)
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
   const [flowerposts, setFlowerposts] = useState([])
+  const [error, setError] = useState(null)  // Add error state
+  const [loading, setLoading] = useState(false) //added
 
   const navigate = useNavigate()
 
   const fetchAllFlowerposts = async () => {
-    const allFlowerposts = await flowerpostService.index()
-    setFlowerposts(allFlowerposts)
+    if (!user) return
+    setLoading(true)
+    setError(null)
+    try {
+      const data = await flowerpostService.index()
+      if (Array.isArray(data)) {
+        setFlowerposts(data)
+      } else {
+        setError('Received invalid data format from server')
+      }
+    } catch (error) {
+      setError('Failed to load flower posts. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
-    if (user) {fetchAllFlowerposts()}
+    if (user) {
+      fetchAllFlowerposts()
+    } else {
+      setFlowerposts([])
+    }
   }, [user])
 
   const handleAddFlowerpost = async (formData) => {
@@ -38,6 +57,17 @@ const App = () => {
   }
 
 
+  const handleDeleteFlowerpost = async (flowerpostId) => { 
+      try {
+        await flowerpostService.deleteHoot(flowerpostId)
+        await fetchAllFlowerposts()
+        navigate('/flowerposts')
+      } catch (error) {
+        console.error('Error deleting flowerpost:', error)
+        setError('Failed to delete flower post. Please try again.')
+      }
+    }
+
   const handleSignout = () => {
     authService.signout()
     setUser(null)
@@ -45,14 +75,15 @@ const App = () => {
 
   return (
     <>
-      <AuthedUser.Provider value={user}>
+      <AuthedUserContext.Provider value={user}>
         <NavBar user={user} handleSignout={handleSignout} />
+        {error && <div className="error-message">{error}</div>}
         <Routes>
           {user ? (
             <>
             <Route path="/" element={<ProfilePage user={user} />} />
             <Route path="/flowerposts" element={<FlowerPostList flowerposts={flowerposts} />} />
-            <Route path="/flowerposts/:flowerpostId" element={<FlowerPostDetails />} />
+            <Route path="/flowerposts/:flowerpostId" element={<FlowerPostDetails handleDeleteFlowerpost={handleDeleteFlowerpost}/>} />
             <Route path="/flowerposts/new" element={<FlowerPostForm handleAddFlowerpost={handleAddFlowerpost} />} />
             </>
           ) : (
@@ -61,7 +92,7 @@ const App = () => {
           <Route path="/sign-up" element={<SignupForm setUser={setUser} />} />
           <Route path="/sign-in" element={<SigninForm setUser={setUser} />} />
         </Routes>
-      </AuthedUser.Provider>
+      </AuthedUserContext.Provider>
     </>
   )
 }

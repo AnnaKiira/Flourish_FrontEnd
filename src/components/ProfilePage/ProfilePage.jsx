@@ -1,8 +1,8 @@
-import { AuthedUser } from '../../App'
+import { AuthedUserContext } from '../../App'
 import { useContext } from 'react'
 
 const ProfilePage = ({}) => {
-    const user = useContext(AuthedUser)
+    const user = useContext(AuthedUserContext)
     return (
       <main>
         <h1>Welcome {user.username}</h1>

@@ -20,7 +20,7 @@ const FlowerpostForm = ({handleAddFlowerpost}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('formData', formData);
+    //console.log('formData', formData);
     handleAddFlowerpost(formData)
   }
 

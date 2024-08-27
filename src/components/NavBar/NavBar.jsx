@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import { AuthedUser } from '../../App'
+import { AuthedUserContext } from '../../App'
 import { useContext } from 'react'
 
 const NavBar = ({ handleSignout }) => {
-    const user = useContext(AuthedUser)
+    const user = useContext(AuthedUserContext)
     return (
       <>
         {user ? (

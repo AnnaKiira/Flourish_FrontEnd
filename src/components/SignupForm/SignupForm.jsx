@@ -21,6 +21,8 @@ const SignupForm = ({ setUser }) => {
     const [formData, setFormData] = useState({
         email: '',
         username: '',
+        first_name: '',
+        last_name: '',
         password: '',
         password_confirmation: '',
     })
@@ -38,6 +40,7 @@ const SignupForm = ({ setUser }) => {
             setUser(newUser)
             navigate('/')
         } catch (error) {
+            console.error('Signup error:', error)
             updateMessage(error.message)
         }
     }
@@ -45,7 +48,7 @@ const SignupForm = ({ setUser }) => {
     const { email, username, password, password_confirmation } = formData
 
     const isFormInvalid = () => {
-        return !(email && username && password && password === password_confirmation)
+        return !(email && username && password && password === password_confirmation && formData.first_name && formData.last_name)
     }
 
     return (
@@ -62,6 +65,26 @@ const SignupForm = ({ setUser }) => {
                         name="email"
                         onChange={handleChange}
                         required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="first_name">First Name:</label>
+                    <input
+                        type="text"
+                        id="first_name"
+                        value={formData.first_name}
+                        name="first_name"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="last_name">Last Name:</label>
+                    <input
+                        type="text"
+                        id="last_name"
+                        value={formData.last_name}
+                        name="last_name"
+                        onChange={handleChange}
                     />
                 </div>
                 <div>

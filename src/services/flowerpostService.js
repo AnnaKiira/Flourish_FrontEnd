@@ -1,47 +1,72 @@
-const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/flowerposts`
-const COMMENT_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/comments`
+const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/flowerposts/`
+const COMMENT_URL = `${import.meta.env.VITE_BACKEND_URL}/comments/`
 
 const index = async () => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+        throw new Error('No token found')
+    }
     try {
         const res = await fetch(BASE_URL, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+            headers: { Authorization: `Bearer ${token}` },
         })
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`)
+        }
         return res.json()
     } catch (error) {
-        console.log(error)
+        console.error('Error fetching flowerposts:', error)
+        throw error
     }
 }
 
 const show = async (flowerpostId) => {
     try {
-        const res = await fetch(`${BASE_URL}/${flowerpostId}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        })
-        return res.json()
-    } catch (error) {
-        console.log(error)
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('No token found');
+        const res = await fetch(`${BASE_URL}${flowerpostId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.detail || `HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      } catch (error) {
+        console.error('Error fetching flowerpost:', error);
+        throw error;
+      }
     }
-}
 
 const create = async (flowerpostFormData) => {
     try {
-        const res = await fetch(`${BASE_URL}/`, {
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('No token found');
+        
+        const res = await fetch(BASE_URL, {
             method: 'POST',
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(flowerpostFormData),
-        })
-        return res.json()
+        });
+        
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.detail || `HTTP error! status: ${res.status}`);
+        }
+        
+        return res.json();
     } catch (error) {
-        console.log('Error creating flowerpost:', error)
+        console.error('Error creating flowerpost:', error);
+        throw error;
     }
 }
 
 const createComment = async (flowerpostId, formData) => {
     try {
-        const res = await fetch(`${COMMENT_URL}/`, {
+        const res = await fetch(`${COMMENT_URL}`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -58,6 +83,19 @@ const createComment = async (flowerpostId, formData) => {
     }
 }
 
+const deleteFlowerpost = async (flowerpostId) => {
+    try {
+      const res = await fetch(`${BASE_URL}${flowerpostId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      return res.json()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
-export { index, show, create, createComment }
+export { index, show, create, createComment, deleteFlowerpost }
