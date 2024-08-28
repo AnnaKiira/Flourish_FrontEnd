@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { /* Link, */ useNavigate } from 'react-router-dom'
 import * as authService from '../../services/authService'
+import styles from '../../styles/AuthForm.module.css'
 
 const SigninForm = ({ setUser }) => {
   const navigate = useNavigate()
@@ -31,12 +32,13 @@ const SigninForm = ({ setUser }) => {
   }
 
   return (
-    <main>
-      <h1>Log In</h1>
+    <main className={styles.formContainer}>
+      <div className={styles.formCard}>
+      <h1 className={styles.formTitle}>Sign In</h1>
       {message && <p>{message}</p>}
       <form autoComplete="off" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="username" className={styles.label}>Username:</label>
           <input
             type="text"
             autoComplete="off"
@@ -45,10 +47,11 @@ const SigninForm = ({ setUser }) => {
             name="username"
             onChange={handleChange}
             required
+            className={styles.input}
           />
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="password" className={styles.label}>Password:</label>
           <input
             type="password"
             autoComplete="off"
@@ -57,15 +60,17 @@ const SigninForm = ({ setUser }) => {
             name="password"
             onChange={handleChange}
             required
+            className={styles.input}
           />
         </div>
-        <div>
-          <button>Log In</button>
-          <Link to="/">
+        <div className={styles.buttonGroup}>
+          <button className={styles.button}>Sign In</button>
+          {/* <Link to="/">
             <button>Go Back</button>
-          </Link>
+          </Link> */}
         </div>
       </form>
+      </div>
     </main>
   )
 }

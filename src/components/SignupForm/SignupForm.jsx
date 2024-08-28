@@ -1,6 +1,7 @@
 import * as authService from '../../services/authService'
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { /* Link, */ useNavigate } from 'react-router-dom'
+import styles from '../../styles/AuthForm.module.css'
 
 const passwordStrength = (password) => {
     const hasUpperCase = /[A-Z]/.test(password);
@@ -52,12 +53,13 @@ const SignupForm = ({ setUser }) => {
     }
 
     return (
-        <main>
-            <h1>Sign Up</h1>
-            <p>{message}</p>
+        <main className={styles.formContainer}>
+            <div className={styles.formCard}>
+            <h1 className={styles.formTitle}>Sign Up</h1>
+            {message && <p>{message}</p>}
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="email">Email:</label>
+                <div className={styles.formGroup}>
+                    <label htmlFor="email" className={styles.label}>Email:</label>
                     <input
                         type="email"
                         id="email"
@@ -65,30 +67,33 @@ const SignupForm = ({ setUser }) => {
                         name="email"
                         onChange={handleChange}
                         required
+                        className={styles.input}
                     />
                 </div>
-                <div>
-                    <label htmlFor="first_name">First Name:</label>
+                <div className={styles.formGroup}>
+                    <label htmlFor="first_name" className={styles.label}>First Name:</label>
                     <input
                         type="text"
                         id="first_name"
                         value={formData.first_name}
                         name="first_name"
                         onChange={handleChange}
+                        className={styles.input}
                     />
                 </div>
-                <div>
-                    <label htmlFor="last_name">Last Name:</label>
+                <div className={styles.formGroup}>
+                    <label htmlFor="last_name" className={styles.label}>Last Name:</label>
                     <input
                         type="text"
                         id="last_name"
                         value={formData.last_name}
                         name="last_name"
                         onChange={handleChange}
+                        className={styles.input}
                     />
                 </div>
-                <div>
-                    <label htmlFor="username">Username:</label>
+                <div className={styles.formGroup}>
+                    <label htmlFor="username" className={styles.label}>Username:</label>
                     <input
                         type="text"
                         id="name"
@@ -96,10 +101,11 @@ const SignupForm = ({ setUser }) => {
                         name="username"
                         onChange={handleChange}
                         required
+                        className={styles.input}
                     />
                 </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
+                <div className={styles.formGroup}>
+                    <label htmlFor="password" className={styles.label}>Password:</label>
                     <input
                         type="password"
                         id="password"
@@ -107,12 +113,13 @@ const SignupForm = ({ setUser }) => {
                         name="password"
                         onChange={handleChange}
                         required
+                        className={styles.input}
                     />
-                    <small>Password strength: {passwordStrength(password)}</small>
-                    <small>Password must be at least 8 characters long. Use a mix of letters, numbers, and symbols.</small>
+                    <small className={styles.passwordInfo}>Password strength: {passwordStrength(password)}</small> <br></br>
+                    <small className={styles.passwordInfo}>Password must be at least 8 characters long. Use a mix of letters, numbers, and symbols.</small>
                 </div>
-                <div>
-                    <label htmlFor="confirm">Confirm Password:</label>
+                <div className={styles.formGroup}>
+                    <label htmlFor="confirm" className={styles.label}>Confirm Password:</label>
                     <input
                         type="password"
                         id="confirm"
@@ -120,15 +127,17 @@ const SignupForm = ({ setUser }) => {
                         name="password_confirmation"
                         onChange={handleChange}
                         required
+                        className={styles.input}
                     />
                 </div>
                 <div>
-                    <button disabled={isFormInvalid()}>Sign Up</button>
-                    <Link to="/">
+                    <button className={styles.button} disabled={isFormInvalid()}>Sign Up</button>
+                    {/* <Link to="/">
                         <button>Go Back</button>
-                    </Link>
+                    </Link> */}
                 </div>
             </form>
+            </div>
         </main>
     )
 }
