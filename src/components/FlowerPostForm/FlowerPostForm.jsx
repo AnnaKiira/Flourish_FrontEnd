@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import * as flowerpostService from '../../services/flowerpostService'
+import styles from './FlowerPostForm.module.css'
 
 const FlowerpostForm = ({handleAddFlowerpost, handleUpdateFlowerpost}) => {
   const [formData, setFormData] = useState({
@@ -49,10 +50,12 @@ const FlowerpostForm = ({handleAddFlowerpost, handleUpdateFlowerpost}) => {
   }
 
   return (
-    <main>
-        <h1>{ flowerpostId ? 'Update Post' : 'Create Post'}</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title-input">Title</label>
+    <main className={styles.formContainer}>
+        <div className={styles.formCard}>
+        <h1 className={styles.formTitle}>{ flowerpostId ? 'Update Post' : 'Create Post'}</h1>
+      <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.formGroup}>
+        <label htmlFor="title-input" className={styles.label}>Title</label>
         <input
           required
           type="text"
@@ -60,14 +63,18 @@ const FlowerpostForm = ({handleAddFlowerpost, handleUpdateFlowerpost}) => {
           id="title-input"
           value={formData.title}
           onChange={handleChange}
+          className={styles.input}
         />
-        <label htmlFor="category-input">Category</label>
+        </div>
+        <div className={styles.formGroup}>
+        <label htmlFor="category-input" className={styles.label}>Category</label>
         <select
           required
           name="category"
           id="category-input"
           value={formData.category}
           onChange={handleChange}
+          className={styles.select}
         >
           {categoryOptions.map(category => (
             <option key={category.id} value={category.id}>
@@ -75,17 +82,21 @@ const FlowerpostForm = ({handleAddFlowerpost, handleUpdateFlowerpost}) => {
             </option>
           ))}
         </select>
-        
-        <label htmlFor="text-input">Text</label>
+        </div>
+        <div className={styles.formGroup}>
+        <label htmlFor="text-input" className={styles.label}>Text</label>
         <textarea
           required
           name="text"
           id="text-input"
           value={formData.text}
           onChange={handleChange}
+          className={styles.textarea}
         />
-        <button type="submit">SUBMIT</button>
+        </div>
+        <button type="submit" className={styles.submitButton}>SUBMIT</button>
       </form>
+      </div>
     </main>
   )
 }

@@ -1,0 +1,68 @@
+.formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .formCard {
+    background-color: #D4CC9A;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 80px;
+    width: 100%;
+    max-width: 700px;
+  }
+  
+  .formTitle {
+    font-size: 32px;
+    color: #152F29;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formGroup {
+    margin-bottom: 30px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #152F29;
+    font-size: 18px;
+  }
+  
+  .input,
+  .select,
+  .textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #D4CC9A;
+    border-radius: 6px;
+    font-size: 18px;
+    box-sizing: border-box;
+  }
+  
+  .textarea {
+    min-height: 150px;
+    max-height: 250px;
+    resize: vertical;
+  }
+  
+  .submitButton {
+    background-color: #89A894;
+    color: #152F29;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
