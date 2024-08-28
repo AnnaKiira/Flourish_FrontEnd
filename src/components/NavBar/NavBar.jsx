@@ -1,40 +1,27 @@
 import { Link } from 'react-router-dom'
 import { AuthedUserContext } from '../../App'
 import { useContext } from 'react'
+import styles from './NavBar.module.css'
 
 const NavBar = ({ handleSignout }) => {
     const user = useContext(AuthedUserContext)
     return (
       <>
         {user ? (
-          <nav>
-            <ul>
-              Welcome {user.username}
-              
-                <Link to="/">Profile</Link>
-              
-              
-              <Link to='/flowerposts'>Flowerposts</Link>
-            
-            
-              <Link to="/flowerposts/new">Add a post</Link>
-            
-              
-                <Link to="" onClick={handleSignout}>
-                  Sign Out
-                </Link>
-              
+          <nav className={styles.navbar}>
+            <ul className={styles.navList}>
+                <li className={styles.navItem}>{user.username}</li>
+                <li><Link to="/" className={styles.navLink}>Profile</Link></li>
+                <li><Link to='/flowerposts' className={styles.navLink}>Flowerposts</Link></li>
+                <li><Link to="/flowerposts/new" className={styles.navLink}>Add a post</Link></li>
+                <li><Link to="" onClick={handleSignout} className={styles.navLink}>Sign Out</Link></li>
             </ul>
           </nav>
         ) : (
-          <nav>
-            <ul>
-              <li>
-                <Link to="/sign-in">Sign In</Link>
-              </li>
-              <li>
-                <Link to="/sign-up">Sign Up</Link>
-              </li>
+          <nav className={styles.navbar}>
+            <ul className={styles.navList}>
+              <li><Link to="/sign-in" className={styles.navLink}>Sign In</Link></li>
+              <li><Link to="/sign-up" className={styles.navLink}>Sign Up</Link></li>
             </ul>
           </nav>
         )}
