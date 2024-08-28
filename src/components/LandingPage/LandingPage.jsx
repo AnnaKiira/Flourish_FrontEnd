@@ -1,6 +1,8 @@
+import styles from './LandingPage.module.css'
+
 const LandingPage = () => {
     return (
-      <main>
+      <main className={styles.formContainer}>
         <h1>Plant the Seed, Share the Journey</h1>
         <h3>
             Join a community of garden enthusiasts. 
