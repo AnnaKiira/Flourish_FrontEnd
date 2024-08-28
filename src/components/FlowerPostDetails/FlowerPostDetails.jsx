@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from 'react'
 import { AuthedUserContext } from '../../App'
 import CommentForm from '../CommentForm/CommentForm'
 import * as flowerpostService from '../../services/flowerpostService'
+import styles from './FlowerpostDetails.module.css'
 
 const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
     const [flowerpost, setFlowerpost] = useState(null)
@@ -40,38 +41,36 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
     if (!flowerpost) return <main>Loading...</main>
 
     return (
-        <main>
+        <main className={styles.flowerpostDetails}>
 
             <header>
-                <h1>{flowerpost.title}</h1>
-                <p>Category: {flowerpost.category?.name || 'Uncategorized'}</p>
-                <p>
-                    Posted by: {flowerpost.owner?.username || 'Unknown User'}
-                </p>
+                <h1 className={styles.title}>{flowerpost.title}</h1>
+                <p className={styles.category}>Category: {flowerpost.category?.name || 'Uncategorized'}</p>
+                <p className={styles.author}>Posted by: {flowerpost.owner?.username || 'Unknown User'}</p>
             </header>
 
-            <p>{flowerpost.text}</p>
+            <p className={styles.content}>{flowerpost.text}</p>
 
             { isOwner && (
-                <section>
-                    <Link to={`/flowerposts/${flowerpostId}/edit`}>Edit</Link>
-                    <button onClick={() => handleDeleteFlowerpost(flowerpostId)}>Delete Post</button>
+                <section className={styles.actions}>
+                    <Link to={`/flowerposts/${flowerpostId}/edit`} className={styles.editButton}>Edit Post</Link>
+                    <button onClick={() => handleDeleteFlowerpost(flowerpostId)} className={styles.deleteButton}>Delete Post</button>
                 </section>
             )}
 
-            <section>
+            <section className={styles.comments}>
                 <h2>Comments</h2>
                 <CommentForm handleAddComment={handleAddComment}/>
-                {!flowerpost.comments?.length && <p>There are no comments</p>}
+                {!flowerpost.comments?.length && <p className={styles.noComments}>Be the first to comment</p>}
                 {flowerpost.comments?.map((comment) => (
-                    <article key={comment.id}>
+                    <article key={comment.id} className={styles.comment}>
                         <header>
                             <p>
-                                {comment.owner?.username} posted on <br></br>
-                                {new Date(comment.created_at).toLocaleDateString()}
+                            {comment.owner?.username} Posted <br></br>
+                            {new Date(comment.created_at).toLocaleDateString()}
                             </p>
                         </header>
-                        <p>{comment.text}</p>
+                        <p className={styles.commentText}>{comment.text}</p>
                     </article>
                 ))}
             </section>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import styles from './CommentForm.module.css'
 
 //import * as flowerpostService from '../../services/flowerpostService' 
 
@@ -16,8 +17,8 @@ const CommentForm = ({handleAddComment}) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="text-input">Your comment:</label>
+    <form onSubmit={handleSubmit} className={styles.commentForm}>
+      <label htmlFor="text-input" className={styles.label}>Type your comment here...</label>
       <textarea
         required
         type="text"
@@ -25,8 +26,9 @@ const CommentForm = ({handleAddComment}) => {
         id="text-input"
         value={formData.text}
         onChange={handleChange}
+        className={styles.textarea}
       />
-      <button type="submit">SUBMIT COMMENT</button>
+      <button type="submit" className={styles.submitButton}>SUBMIT COMMENT</button>
     </form>
   )
 }
