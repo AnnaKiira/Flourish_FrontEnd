@@ -1,0 +1,53 @@
+.postList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .postCard {
+    flex: 1 1 300px; /* my cards can grow and shrink, with a base width of 300px */
+    max-width: calc(33.333% - 20px); /* this will ensure my cards will only display a maximum of 3 cards per row on larger screens */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    transition: box-shadow 0.5s ease;
+    text-decoration: none; /* this removes the default underline on my links */
+    color: #152F29;
+    background-color: #ACC4DA;
+  }
+  
+  .postCard:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    color: #283B4D;
+  }
+  
+  .postTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .postCategory {
+    color: #4F4F4F;
+    font-size: 14px;
+  }
+  
+  .postAuthor {
+    font-style: italic;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  @media (max-width: 1200px) {
+    .postCard {
+      max-width: calc(50% - 20px); /* 2 cards per row on medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .postCard {
+      max-width: 100%; /* 1 card per row on small screens */
+    }
+  }
