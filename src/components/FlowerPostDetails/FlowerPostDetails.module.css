@@ -82,9 +82,25 @@
     padding: 10px;
     margin-bottom: 15px; /* for adding space between each post */
     width: 100%;
+    position: relative; /* added position to the delete button, since it would have been way out of the comment section */
 }
 
 .commentText { /* for adding space between the comment text when its a long comment */
     font-size: 16px;
     line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.deleteCommentButton {
+    background-color: #DBAFC1;
+    color: #152F29;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }

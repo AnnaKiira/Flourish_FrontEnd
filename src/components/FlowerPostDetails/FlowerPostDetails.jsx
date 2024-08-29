@@ -86,7 +86,12 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
                         </header>
                         <p className={styles.commentText}>{comment.text}</p>
                         {commentOwner && (
-                            <button onClick={() => handleDeleteComment(comment.id)}>Delete Comment</button>
+                            <button 
+                            onClick={() => handleDeleteComment(comment.id)}
+                            className={styles.deleteCommentButton}
+                        >
+                            Delete
+                        </button>
                         )}
                     </article>
                     )
