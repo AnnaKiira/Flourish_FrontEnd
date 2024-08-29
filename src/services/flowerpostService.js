@@ -62,6 +62,20 @@ const createComment = async (flowerpostId, formData) => {
     }
 }
 
+const deleteComment = async (commentId) => {
+    const token = localStorage.getItem('token')
+    try {
+        const res = await fetch(`${COMMENT_URL}${commentId}/`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+    } catch (error) {
+        console.error('Error deleting comment:', error)
+    }
+}
+
 const deleteFlowerpost = async (flowerpostId) => {
     const token = localStorage.getItem('token')
     try {
@@ -71,7 +85,7 @@ const deleteFlowerpost = async (flowerpostId) => {
                 Authorization: `Bearer ${token}`,
             },
         })
-        return { message: 'Flowerpost deleted successfully' }
+        /* return { message: 'Flowerpost deleted successfully' } */
     } catch (error) {
         console.error('Error deleting flowerpost:', error)
     }
@@ -108,4 +122,4 @@ const userProfile = async () => {
 }
 
 
-export { index, show, create, createComment, deleteFlowerpost, updateFlowerpost, userProfile }
+export { index, show, create, createComment, deleteFlowerpost, updateFlowerpost, userProfile, deleteComment }

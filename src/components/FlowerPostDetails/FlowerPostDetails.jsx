@@ -36,6 +36,18 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
         }
     }
 
+    const handleDeleteComment = async (commentId) => {
+        try {
+            await flowerpostService.deleteComment(commentId)
+            setFlowerpost(prev => ({
+                ...prev,
+                comments: prev.comments.filter(comment => comment.id !== commentId)
+            }))
+        } catch (error) {
+            console.error('Error deleting comment:', error)
+        }
+    }
+
     const isOwner = flowerpost && user && flowerpost.owner.id === user.user_id
 
     if (!flowerpost) return <main>Loading...</main>
@@ -62,7 +74,9 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
                 <h2>Comments</h2>
                 <CommentForm handleAddComment={handleAddComment}/>
                 {!flowerpost.comments?.length && <p className={styles.noComments}>Be the first to comment</p>}
-                {flowerpost.comments?.map((comment) => (
+                {flowerpost.comments?.map((comment) => {
+                    const commentOwner = user && user.user_id === comment.owner
+                    return (
                     <article key={comment.id} className={styles.comment}>
                         <header>
                             <p>
@@ -71,8 +85,12 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
                             </p>
                         </header>
                         <p className={styles.commentText}>{comment.text}</p>
+                        {commentOwner && (
+                            <button onClick={() => handleDeleteComment(comment.id)}>Delete Comment</button>
+                        )}
                     </article>
-                ))}
+                    )
+                })}
             </section>
         </main>
     )
