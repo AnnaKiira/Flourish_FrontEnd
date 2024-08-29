@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import * as flowerpostService from '../../services/flowerpostService'
+import ImageUpload from '../ImageUpload/ImageUpload.jsx' 
 import styles from './FlowerPostForm.module.css'
 
 const FlowerpostForm = ({handleAddFlowerpost, handleUpdateFlowerpost}) => {
@@ -8,7 +9,7 @@ const FlowerpostForm = ({handleAddFlowerpost, handleUpdateFlowerpost}) => {
     title: '',
     category: '1',
     text: '',
-    upload_image: 'https://via.placeholder.com/150',
+    upload_image: '',
   })
 
   const categoryOptions = [ //the categories are IDs on the backend side
@@ -49,6 +50,10 @@ const FlowerpostForm = ({handleAddFlowerpost, handleUpdateFlowerpost}) => {
     }
   }
 
+  const handleImageUpload = (value) => {
+    setFormData({...formData, upload_image: value})
+  }
+
   return (
     <main className={styles.formContainer}>
         <div className={styles.formCard}>
@@ -83,6 +88,14 @@ const FlowerpostForm = ({handleAddFlowerpost, handleUpdateFlowerpost}) => {
           ))}
         </select>
         </div>
+        <div className={styles.formGroup}>
+            <ImageUpload
+              name="upload_image"
+              label="Upload Image"
+              upload_image={formData.upload_image} 
+              handleImageUpload={handleImageUpload}
+            />
+          </div>
         <div className={styles.formGroup}>
         <label htmlFor="text-input" className={styles.label}>Text</label>
         <textarea

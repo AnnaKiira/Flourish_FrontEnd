@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import styles from './FlowerPostList.module.css'
 
 const FlowerPostList = ({ flowerposts, loading, error }) => {
-    console.log('Flowerposts data:', flowerposts) //ADDED
+    console.log('Flowerposts data:', flowerposts) 
     if (loading) return <main>Loading...</main>;
     if (error) return <main>Error: {error}</main>;
     if (!Array.isArray(flowerposts) || flowerposts.length === 0) {

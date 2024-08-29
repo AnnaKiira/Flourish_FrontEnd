@@ -40,6 +40,7 @@ const create = async (flowerpostFormData) => {
         return res.json()
     } catch (error) {
         console.error('Error creating flowerpost:', error)
+        
     }
 }
 

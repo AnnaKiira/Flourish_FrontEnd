@@ -61,6 +61,12 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
                 <p className={styles.author}>Posted by: {flowerpost.owner?.username || 'Unknown User'}</p>
             </header>
 
+            {flowerpost.upload_image && (
+                <div className={styles.imageContainer}>
+                    <img src={flowerpost.upload_image} alt={flowerpost.title} className={styles.uploadedImage} />
+                </div>
+            )}
+
             <p className={styles.content}>{flowerpost.text}</p>
 
             { isOwner && (
