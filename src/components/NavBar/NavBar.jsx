@@ -10,7 +10,6 @@ const NavBar = ({ handleSignout }) => {
         {user ? (
           <nav className={styles.navbar}>
             <ul className={styles.navList}>
-                <li className={styles.navItem}>{user.username}</li>
                 <li><Link to="/" className={styles.navLink}>Profile</Link></li>
                 <li><Link to='/flowerposts' className={styles.navLink}>Flowerposts</Link></li>
                 <li><Link to="/flowerposts/new" className={styles.navLink}>Add a post</Link></li>
