@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styles from './CommentForm.module.css'
 
-//import * as flowerpostService from '../../services/flowerpostService' 
-
-const CommentForm = ({handleAddComment}) => {
+const CommentForm = ({ handleAddComment }) => {
   const [formData, setFormData] = useState({ text: '' })
 
   const handleChange = (event) => {

@@ -16,10 +16,6 @@ const signup = async (formData) => {
       })
       const json = await res.json()
       
-      if (!res.ok) {
-        throw new Error(JSON.stringify(json) || 'Signup failed')
-      }
-      
       if (json.access) {
         localStorage.setItem('token', json.access)
         localStorage.setItem('refreshToken', json.refresh)
@@ -29,7 +25,6 @@ const signup = async (formData) => {
       }
     } catch (error) {
       console.error('Signup error:', error)
-      throw error
     }
 }
 

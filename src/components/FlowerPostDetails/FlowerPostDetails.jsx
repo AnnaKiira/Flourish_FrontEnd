@@ -7,8 +7,6 @@ import styles from './FlowerpostDetails.module.css'
 
 const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
     const [flowerpost, setFlowerpost] = useState(null)
-    // added error state to handle and display errors since I kept getting on protected routes
-    const [error, setError] = useState(null)
     const { flowerpostId } = useParams()
     const user = useContext(AuthedUserContext)
 
@@ -20,7 +18,6 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
                 setFlowerpost(flowerpostData)
             } catch (error) {
                 console.error('Error fetching flowerpost:', error)
-                setError(error.message)
             }
         }
         fetchFlowerpost()

@@ -72,6 +72,7 @@ const deleteComment = async (commentId) => {
                 Authorization: `Bearer ${token}`,
             },
         })
+        return res.status
     } catch (error) {
         console.error('Error deleting comment:', error)
     }
@@ -86,7 +87,7 @@ const deleteFlowerpost = async (flowerpostId) => {
                 Authorization: `Bearer ${token}`,
             },
         })
-        /* return { message: 'Flowerpost deleted successfully' } */
+        return res.status
     } catch (error) {
         console.error('Error deleting flowerpost:', error)
     }

@@ -19,26 +19,18 @@ export const AuthedUserContext = createContext(null)
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
   const [flowerposts, setFlowerposts] = useState([])
-  const [error, setError] = useState(null)  // Add error state
-  const [loading, setLoading] = useState(false) //added
 
   const navigate = useNavigate()
 
   const fetchAllFlowerposts = async () => {
     if (!user) return
-    setLoading(true)
-    setError(null)
     try {
       const data = await flowerpostService.index()
       if (Array.isArray(data)) {
         setFlowerposts(data)
-      } else {
-        setError('Received invalid data format from server')
       }
     } catch (error) {
-      setError('Failed to load flower posts. Please try again.')
-    } finally {
-      setLoading(false)
+      console.error('Failed to load flower posts:', error)
     }
   }
 
@@ -64,7 +56,6 @@ const App = () => {
         navigate('/flowerposts')
       } catch (error) {
         console.error('Error deleting flowerpost:', error)
-        setError('Failed to delete flower post. Please try again.')
       }
   }
 
@@ -77,7 +68,6 @@ const App = () => {
       navigate(`/flowerposts/${flowerpostId}`)
     } catch (error) {
       console.error('Error updating flowerpost:', error)
-      setError('Failed to update flower post. Please try again.')
     }
   }
 
@@ -90,7 +80,6 @@ const App = () => {
     <>
       <AuthedUserContext.Provider value={user}>
         <NavBar user={user} handleSignout={handleSignout} />
-        {error && <div className="error-message">{error}</div>}
         <Routes>
           {user ? (
             <>

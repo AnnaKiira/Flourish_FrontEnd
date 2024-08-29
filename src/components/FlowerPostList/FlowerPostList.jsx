@@ -1,18 +1,11 @@
 import { Link } from 'react-router-dom'
 import styles from './FlowerPostList.module.css'
 
-const FlowerPostList = ({ flowerposts, loading, error }) => {
-    console.log('Flowerposts data:', flowerposts) 
-    if (loading) return <main>Loading...</main>;
-    if (error) return <main>Error: {error}</main>;
-    if (!Array.isArray(flowerposts) || flowerposts.length === 0) {
-      return <main>No flower posts available.</main>;
-    }
+const FlowerPostList = ({ flowerposts }) => {
   
     return (
         <main className={styles.postList}>
           {flowerposts.map(flowerpost => (
-            //console.log('Created at:', flowerpost.created_at)
             
               <Link className={styles.postCard} key={flowerpost.id} to={`/flowerposts/${flowerpost.id}`}>
                 <article>
