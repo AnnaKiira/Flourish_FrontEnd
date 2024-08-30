@@ -12,7 +12,7 @@ const NavBar = ({ handleSignout }) => {
             <ul className={styles.navList}>
                 <li><Link to="/" className={styles.navLink}>Profile</Link></li>
                 <li><Link to='/flowerposts' className={styles.navLink}>Flowerposts</Link></li>
-                <li><Link to="/flowerposts/new" className={styles.navLink}>Add a post</Link></li>
+                <li><Link to="/flowerposts/new" className={styles.navLink}>Add A Post</Link></li>
                 <li><Link to="" onClick={handleSignout} className={styles.navLink}>Sign Out</Link></li>
             </ul>
           </nav>
