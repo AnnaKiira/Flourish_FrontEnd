@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react'
 import { AuthedUserContext } from '../../App'
 import CommentForm from '../CommentForm/CommentForm'
 import * as flowerpostService from '../../services/flowerpostService'
-import styles from './FlowerpostDetails.module.css'
+import styles from './FlowerPostDetails.module.css'
 
 const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
     const [flowerpost, setFlowerpost] = useState(null)
@@ -12,7 +12,6 @@ const FlowerpostDetails = ({handleDeleteFlowerpost}) => {
 
     useEffect(() => {
         const fetchFlowerpost = async () => {
-            // added try-catch for error handling
             try {
                 const flowerpostData = await flowerpostService.show(flowerpostId)
                 setFlowerpost(flowerpostData)
