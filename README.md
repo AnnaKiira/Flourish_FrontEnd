@@ -15,10 +15,10 @@ Flourish is an app designed to function like a subreddit for flower gardeners an
 With these categories, users can track the progress of their flowers, share gardening tips, and connect with other flower lovers to seek advice on their personal flower planting journeys.
 Although I'm not an expert flower gardener, my love for flowers inspired the creation of this app. The idea of a subreddit-like platform where users could categorise their posts around this theme seemed fitting and exciting to me.
 
-Link to my deployed app:
-- https://main--flourishfront.netlify.app/
-Link to my planning materials.
-- https://trello.com/b/lFOblllP/project-4-flower-gardening
+- Link to my deployed app:
+-- https://main--flourishfront.netlify.app/
+- Link to my planning materials.
+-- https://trello.com/b/lFOblllP/project-4-flower-gardening
 
 Technologies used:
 Frontend:
