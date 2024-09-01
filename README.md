@@ -8,7 +8,7 @@ Screenshots of Flourish:
 
 Flourish is an app designed to function like a subreddit for flower gardeners and enthusiasts. It provides a platform for users to share posts and categorise them within a community focused on cultivating and managing gardens. The app features three main categories for posts:
 
-- Questions
+- Question
 - Status
 - Guide
 
