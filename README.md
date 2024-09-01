@@ -1,7 +1,7 @@
 Screenshot/Logo:
 ![image](https://github.com/user-attachments/assets/9da55df2-be0c-4eb6-bad0-6f6b22d23e29)
 ![image](https://github.com/user-attachments/assets/b160fe52-f08a-434f-bffc-342aa08181f6)
-[screencapture-main-flourishfront-netlify-app-flowerposts-9-2024-09-01-15_13_52.pdf](https://github.com/user-attachments/files/16829225/screencapture-main-flourishfront-netlify-app-flowerposts-9-2024-09-01-15_13_52.pdf)
+![image](https://github.com/user-attachments/assets/035c0b54-a698-4003-8606-44a2ee5afe70)
 
 
 Flourish is an app designed to function like a subreddit for flower gardeners and enthusiasts. It provides a platform for users to share posts and categorize them within a community focused on cultivating and managing gardens. The app features three main categories for posts:
