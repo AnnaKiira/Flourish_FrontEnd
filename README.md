@@ -4,14 +4,14 @@ Screenshot/Logo:
 ![image](https://github.com/user-attachments/assets/035c0b54-a698-4003-8606-44a2ee5afe70)
 
 
-Flourish is an app designed to function like a subreddit for flower gardeners and enthusiasts. It provides a platform for users to share posts and categorize them within a community focused on cultivating and managing gardens. The app features three main categories for posts:
+Flourish is an app designed to function like a subreddit for flower gardeners and enthusiasts. It provides a platform for users to share posts and categorise them within a community focused on cultivating and managing gardens. The app features three main categories for posts:
 
 - Questions
 - Status
 - Guide
 
 With these categories, users can track the progress of their flowers, share gardening tips, and connect with other flower lovers to seek advice on their personal flower planting journeys.
-Although I'm not an expert flower gardener, my love for flowers inspired the creation of this app. The idea of a subreddit-like platform where users could categorize their posts around this theme seemed fitting and exciting to me.
+Although I'm not an expert flower gardener, my love for flowers inspired the creation of this app. The idea of a subreddit-like platform where users could categorise their posts around this theme seemed fitting and exciting to me.
 
 Link to my deployed app:
 - https://main--flourishfront.netlify.app/
