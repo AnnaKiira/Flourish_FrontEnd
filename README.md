@@ -21,21 +21,21 @@ Relevant Links:
 - My planning materials: https://trello.com/b/lFOblllP/project-4-flower-gardening
 
 Technologies used:
-Frontend:
+1. Frontend:
 - React
 - HTML & CSS
 - JavaScript
 
-Backend:
+2. Backend:
 - Python
 - Django
 - Django REST Framework
 
-Database & tools:
+3. Database & tools:
 - PostgreSQL
 - Postman
 
-Deployment:
+4. Deployment:
 - Heroku (Backend)
 - Netlify (Frontend)
 
