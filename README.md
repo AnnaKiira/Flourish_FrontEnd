@@ -16,9 +16,9 @@ With these categories, users can track the progress of their flowers, share gard
 Although I'm not an expert flower gardener, my love for flowers inspired the creation of this app. The idea of a subreddit-like platform where users could categorise their posts around this theme seemed fitting and exciting to me.
 
 Relevant Links:
-My deployed app: https://main--flourishfront.netlify.app/
-My backend repo: https://github.com/AnnaKiira/Flourish
-My planning materials: https://trello.com/b/lFOblllP/project-4-flower-gardening
+- My deployed app: https://main--flourishfront.netlify.app/
+- My backend repo: https://github.com/AnnaKiira/Flourish
+- My planning materials: https://trello.com/b/lFOblllP/project-4-flower-gardening
 
 Technologies used:
 Frontend:
